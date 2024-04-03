@@ -16,7 +16,8 @@ public class SockServer {
   static ObjectInputStream in;
 
   static int port = 8888;
-  private static HashMap<String, Integer> inventory = new HashMap<>();
+  static private HashMap<String, Integer> inventory = new HashMap<>();
+
 
   public static void main (String args[]) {
 
