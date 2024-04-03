@@ -74,6 +74,31 @@ class SockClient {
             json.put("type", "addmany");
             json.put("nums", array);
             break;
+            case 4:
+              System.out.println("Choose roller, enter die count:");
+              String dieCount = scanner.nextLine();
+              json.put("type", "roller");
+              json.put("dieCount", dieCount);
+
+              System.out.println("Enter number of faces:");
+              String faces = scanner.nextLine();
+              json.put("faces", faces);
+              break;
+            case 5:
+              System.out.println("Choose inventory, enter task (add, view, buy):");
+              String task = scanner.nextLine();
+              json.put("type", "inventory");
+              json.put("task", task);
+              if (task.equals("add") || task.equals("buy")) {
+                System.out.println("Enter product name:");
+                String productName = scanner.nextLine();
+                json.put("productName", productName);
+
+                System.out.println("Enter quantity:");
+                String quantity = scanner.nextLine();
+                json.put("quantity", quantity);
+              }
+              break;
         }
         if(!requesting) {
           continue;
@@ -93,6 +118,15 @@ class SockClient {
         if (res.getBoolean("ok")){
           if (res.getString("type").equals("echo")) {
             System.out.println(res.getString("echo"));
+          } else if (res.getString("type").equals("roller")) {
+            JSONObject result = res.getJSONObject("result");
+            System.out.println("Roll results: " + result.toString());
+          } else if (res.getString("type").equals("inventory")) {
+            if (res.has("message")) {
+              System.out.println(res.getString("message"));
+            } else if (res.has("inventory")) {
+              System.out.println("Current inventory: " + res.getJSONObject("inventory").toString());
+            }
           } else {
             System.out.println(res.getInt("result"));
           }
