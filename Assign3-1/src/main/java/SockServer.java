@@ -261,7 +261,7 @@ static JSONObject inventory(JSONObject req) {
     // Roll the dice and collect results
     Map<Integer, Integer> rolledNumbers = new HashMap<>();
     Random random;
-
+    JSONObject res = new JSONObject();
     for (int i = 0; i < req.getInt("dieCount"); i++) {
         try {
             random = new Random();
