@@ -21,7 +21,7 @@ task Server(type: JavaExec) {
   classpath = sourceSets.main.runtimeClasspath
 
   main = 'SockServer'
-  args 9000
+  args 8888
 }
 
 task Client(type: JavaExec) {
